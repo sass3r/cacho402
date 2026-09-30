@@ -1,0 +1,35 @@
+{
+  "name": "cacho402",
+  "version": "1.0.0",
+  "description": "Cacho, the Bolivian dice game, as a pay-per-roll x402 API on Algorand",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx src/server.ts",
+    "pay": "tsx src/client.ts",
+    "test": "tsx src/cacho.test.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@x402-avm/avm": "^2.6.1",
+    "@x402-avm/core": "^2.6.1",
+    "@x402-avm/express": "^2.6.1",
+    "@x402-avm/extensions": "^2.6.1",
+    "@x402-avm/fetch": "^2.6.1",
+    "@x402-avm/paywall": "^2.6.1",
+    "algosdk": "^3.8.0",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}
