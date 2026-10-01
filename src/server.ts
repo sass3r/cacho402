@@ -18,7 +18,7 @@ const PORT = Number(process.env.PORT ?? 4021);
 const PRICE = process.env.PRICE ?? "$0.01";
 const FACILITATOR_URL =
   process.env.FACILITATOR_URL ?? "https://facilitator.goplausible.xyz";
-const PUBLIC_URL = process.env.PUBLIC_URL ?? "";
+const PUBLIC_URL = (process.env.PUBLIC_URL ?? "").replace(/\/+$/, "");
 
 const facilitator = new HTTPFacilitatorClient({ url: FACILITATOR_URL });
 const server = new x402ResourceServer(facilitator);

@@ -18,7 +18,12 @@ const { sk, addr } = algosdk.mnemonicToSecretKey(mnemonic.trim());
 const signer = toClientAvmSigner(Buffer.from(sk).toString("base64"));
 
 const client = new x402Client();
-registerExactAvmScheme(client, { signer });
+registerExactAvmScheme(client, {
+  signer,
+  // Without this the client builds transactions with TestNet params and the
+  // facilitator rejects them ("genesis hash does not match expected network").
+  algodConfig: { algodUrl: process.env.ALGOD_URL ?? "https://mainnet-api.algonode.cloud" },
+});
 const payFetch = wrapFetchWithPayment(fetch, client);
 
 console.log(`payer=${addr.toString()} url=${url}`);
