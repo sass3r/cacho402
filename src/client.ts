@@ -26,6 +26,15 @@ for (let i = 0; i < count; i++) {
   const res = await payFetch(url);
   const body = await res.text();
   console.log(`#${i + 1} HTTP ${res.status}`, body);
+  if (res.status !== 200) {
+    const pr = res.headers.get("payment-required");
+    if (pr) {
+      const decoded = JSON.parse(Buffer.from(pr, "base64").toString());
+      console.log("rejection reason:", decoded.error ?? "(none)");
+      console.log("payment-required:", JSON.stringify(decoded, null, 2));
+    }
+    for (const [k, v] of res.headers) if (/payment|x402|error/i.test(k)) console.log(`${k}: ${v}`);
+  }
   const receipt = res.headers.get("payment-response") ?? res.headers.get("x-payment-response");
   if (receipt) console.log("settlement:", Buffer.from(receipt, "base64").toString());
 }
